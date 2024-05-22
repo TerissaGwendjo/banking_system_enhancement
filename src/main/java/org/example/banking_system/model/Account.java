@@ -1,26 +1,26 @@
 package org.example.banking_system.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Account {
 
-    @Id
+    @Id // signifies it is a primary key
     @GeneratedValue (strategy = GenerationType.SEQUENCE)
-    private Long id;
+    private Long id; // Unique identifier for the account
 
-    private String AccountNumber; // provided by the bank system and not ID
+    @Column (unique = true, nullable = false)
+    private String AccountNumber; // provided by the bank system and not ID and should be unique
     private String AccountType;
     private Double balance;
 
-    //Constructors
-
+    //default constructor
     public Account() {
+        // This constructor doesn't initialize any fields,
+        // it simply creates an instance of Account with default values (null for objects and 0 for primitives)
     }
 
+    // Parameterized constructor that initializes all fields
     public Account(Long id, String accountNumber, String accountType, Double balance) {
         this.id = id;
         AccountNumber = accountNumber;
@@ -28,6 +28,7 @@ public class Account {
         this.balance = balance;
     }
 
+    // Parameterized constructor that initializes all fields except id
     public Account(String accountNumber, String accountType, Double balance) {
         AccountNumber = accountNumber;
         AccountType = accountType;
