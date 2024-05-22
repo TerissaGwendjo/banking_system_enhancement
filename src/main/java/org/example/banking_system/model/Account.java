@@ -10,8 +10,8 @@ public class Account {
     private Long id; // Unique identifier for the account
 
     @Column (unique = true, nullable = false)
-    private String AccountNumber; // provided by the bank system and not ID and should be unique
-    private String AccountType;
+    private String accountNumber; // provided by the bank system and not ID and should be unique
+    private String accountType;
     private Double balance;
 
     //default constructor
@@ -23,15 +23,15 @@ public class Account {
     // Parameterized constructor that initializes all fields
     public Account(Long id, String accountNumber, String accountType, Double balance) {
         this.id = id;
-        AccountNumber = accountNumber;
-        AccountType = accountType;
+        this.accountNumber = accountNumber;
+        this.accountType = accountType;
         this.balance = balance;
     }
 
     // Parameterized constructor that initializes all fields except id
     public Account(String accountNumber, String accountType, Double balance) {
-        AccountNumber = accountNumber;
-        AccountType = accountType;
+        this.accountNumber = accountNumber;
+        this.accountType = accountType;
         this.balance = balance;
     }
 
@@ -44,19 +44,19 @@ public class Account {
         return id;
     }
     public String getAccountNumber() {
-        return AccountNumber;
+        return accountNumber;
     }
 
     public void setAccountNumber(String accountNumber) {
-        AccountNumber = accountNumber;
+        this.accountNumber = accountNumber;
     }
 
     public String getAccountType() {
-        return AccountType;
+        return accountType;
     }
 
     public void setAccountType(String accountType) {
-        AccountType = accountType;
+        this.accountType = accountType;
     }
 
     public Double getBalance() {

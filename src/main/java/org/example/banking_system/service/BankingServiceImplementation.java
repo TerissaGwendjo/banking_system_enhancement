@@ -13,15 +13,17 @@ public class BankingServiceImplementation implements AccountService{
     @Autowired
     private AccountRepository repository;
 
+
     @Override
     @Transactional
+    @Modifying
     public void openNewAccount(String accountType, double initialDeposit) {
+
         Account account = new Account();
         account.setAccountNumber(AccountNumberGenerator.generateAccountNumber());
         account.setAccountType(accountType);
         account.setBalance(initialDeposit);
         repository.save(account);
-
     }
 
     @Override
@@ -29,25 +31,25 @@ public class BankingServiceImplementation implements AccountService{
     @Modifying
     public void depositMoney(String accountNumber, double amount) {
         Account account = repository.findByAccountNumber(accountNumber);
-        if (account != null) {
+        if(account != null){
             account.setBalance(account.getBalance() + amount);
             repository.save(account);
+        }else{
+            throw new RuntimeException("Account not exist");
         }
-        //Handle the case when the account number does not exist
-
-
     }
 
     @Override
     @Transactional
     @Modifying
     public void withdrawMoney(String accountNumber, double amount) {
+
         Account account = repository.findByAccountNumber(accountNumber);
-        if (account != null && account.getBalance() >= amount) {
+        if(account != null && account.getBalance() >= amount){
             account.setBalance(account.getBalance() - amount);
             repository.save(account);
-        } else {
-            throw new RuntimeException("Account does not exist or insufficient funds for withdrawal!");
+        }else{
+            throw new RuntimeException("Account not exist or insufficient funds for withdrawal");
         }
 
     }
@@ -57,6 +59,6 @@ public class BankingServiceImplementation implements AccountService{
     @Modifying
     public void transferMoney(String fromAccount, String toAccount, double amount) {
         withdrawMoney(fromAccount, amount);
-        depositMoney(toAccount,amount);
+        depositMoney(toAccount, amount);
     }
 }
