@@ -6,14 +6,60 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration{
-    @Autowired
-    private UserService userService;
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
 
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+        http
+                .authorizeHttpRequests(
+                        authorizeRequests -> authorizeRequests
+                                .requestMatchers("/signup", "/login").permitAll()
+                                .anyRequest().authenticated()
+                )
+                .formLogin(
+                        formLogin -> formLogin
+                                .loginPage("/login")
+                                .defaultSuccessUrl("/", true)
+                                .permitAll()
+                )
+                .logout(
+                        logout -> logout.permitAll()
+                );
+
+        return http.build();
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService(UserService userService){
+        return  username -> userService.loadUserByUsername(username);
+//    return new UserDetailsService(){
+//
+//
+//      @Override
+//      public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        return new userService.loadUserByUsername(username);
+//      }
+//    };
+    }
+
+
+
+
+
+
+
+
+/*
     @Bean // implicates that the method password Encoder returns a new instance of the password encoder class
     // A bean in Spring is an object created, configured, and managed by the Spring IoC container.
     // Inversion of Control (IoC) is a design principle in software engineering where the control of object creation
@@ -25,5 +71,6 @@ public class SecurityConfiguration{
     protected void configure(HttpSecurity httpSecurity)  {}
     //protected meaning it can be accessible only within the package
             //or subclasses even if the subclasses aren't in the package.
+*/
 
 }
