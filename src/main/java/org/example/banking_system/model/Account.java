@@ -3,6 +3,8 @@ package org.example.banking_system.model;
 import jakarta.persistence.*;
 
 @Entity
+// The @Entity annotation tells the JPA provider (such as Hibernate) that this class is to be mapped to a database table.
+// The fields of the class correspond to columns in the table.
 public class Account {
 
     @Id // signifies it is a primary key
