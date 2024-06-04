@@ -31,6 +31,11 @@ Ensuring all service methods leverage transactional security.
 - Thymeleaf Template Modifications:
 - Included in the Thymeleaf templates user-friendly forms for each banking operation (account creation, deposit, withdrawal, transfer, log in, sign up).
 - Utilizing Bootstrap 5 for responsive and visually appealing forms and layouts.
+
+**Secure User Interaction:**
+- Implementing secure password hashing with industry-standard algorithms (e.g., bcrypt) to protect user credentials.
+- Utilizing secure sessions and protection to prevent unauthorized access and attacks.
+  
 ### Code Structure
 - src/main/java - Contains Java source code for services, controllers, entities, and repositories.
 - src/main/resources - Houses Thymeleaf templates and static resources (HTML,CSS).
