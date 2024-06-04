@@ -1,6 +1,6 @@
 package org.example.banking_system.config;
 //Package imports
-import org.example.banking_system.service.UserService;
+
 import org.example.banking_system.service.UserServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
