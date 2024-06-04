@@ -26,6 +26,7 @@ public class UserController {
     @PostMapping ("/signup")
     public String signUp(@RequestParam String username,
                          @RequestParam String password){
+        userService.saveUser(username,password);
         return "redirect:/login";
     }
 
