@@ -32,35 +32,35 @@ public class SecurityConfiguration{
         http
 
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-
+                        // Permit all requests to the home page and static resources
                         .requestMatchers("/signup", "/login").permitAll()
-
+                        // Require authentication for any other request
                         .anyRequest().authenticated()
 
                 )
 
                 .formLogin(formLogin -> formLogin
 
-                        .loginPage("/login")
+                        .loginPage("/login") // Specifies the login page URL
 
+                        // Redirect to the home page ("/") after successful login, always redirecting even if the user was previously navigating elsewhere
                         .defaultSuccessUrl("/", true)
 
-                        .permitAll()
+                        .permitAll() // Allow everyone to see the login page
 
                 )
 
                 .logout(logout -> logout
 
-                        .logoutUrl("/logout")
+                        .logoutUrl("/logout") // Specifies the logout page URL
 
+                        // Redirect to the login page with a logout parameter after a successful logout
                         .logoutSuccessUrl("/login?logout")
 
                         .permitAll()
 
                 );
-
-
-
+        // Builds and returns the SecurityFilterChain
         return http.build();
 
     }
@@ -69,9 +69,13 @@ public class SecurityConfiguration{
 
     @Autowired
 
-    public void configureGlobal(AuthenticationManagerBuilder auth, UserDetailsService userDetailsService) throws Exception {
-
-        auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+    public void configureGlobal(
+            AuthenticationManagerBuilder auth,
+            UserDetailsService userDetailsService
+    ) throws Exception {
+        auth
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(new BCryptPasswordEncoder());
 
     }
 
