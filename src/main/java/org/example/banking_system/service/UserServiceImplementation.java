@@ -42,14 +42,18 @@ public class UserServiceImplementation implements UserService{
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // Find the user by username
         User user = findByUserName(username);
+        // If user is not found
         if (user == null) {
+            // Throw UsernameNotFoundException
             throw new UsernameNotFoundException("User not found");
         }
+        // Build and return UserDetails object with user details and authorities
         return org.springframework.security.core.userdetails.User
-                .withUsername(user.getUsername())
-                .password(user.getPassword())
-                .authorities("USER") //we can set roles / authorities here
+                .withUsername(user.getUsername()) // Set the username
+                .password(user.getPassword()) // Set the password
+                .authorities("USER") // Set authorities/roles
                 .build();
     }
 }

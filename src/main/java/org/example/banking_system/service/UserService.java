@@ -18,7 +18,6 @@ public interface UserService extends UserDetailsService {
     public void saveUser (String usernames, String password);
 
     //find user by username
-
     User findByUserName(String username);
 
     boolean userCheckPassword (String rawPassword, String encodedPassword);
