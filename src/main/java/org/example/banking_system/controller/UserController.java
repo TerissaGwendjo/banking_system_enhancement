@@ -50,4 +50,12 @@ public class UserController {
         // Redirects to the login page with a success query parameter
         return "redirect:/login?success=true";
     }
+
+    @GetMapping("/login?logout")
+    public String logoutSuccess(Model model) {
+        String errorMessage = "You have been logged out successfully!";
+        model.addAttribute("errorMessage", errorMessage);
+        return "login";
+    }
+
 }
