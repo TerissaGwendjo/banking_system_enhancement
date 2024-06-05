@@ -32,5 +32,27 @@
         <p>Don't have an account? <a th:href="@{/signup}">Sign up here</a></p>
     </div>
 </div>
+
+<!-- JavaScript to hide the logout alert after 10 seconds -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var alerts = document.getElementsByClassName("alert");
+
+        if (alerts[0]) {
+            setTimeout(function() {
+                alerts[0].style.display = "none";
+            }, 5000); // 5 seconds
+        }else if (alerts[1]){
+            setTimeout(function() {
+                alerts[1].style.display = "none";
+            }, 5000); // 5 seconds
+        }else if (alerts[2]){
+            setTimeout(function() {
+                alerts[2].style.display = "none";
+            }, 5000); // 5 seconds
+        }
+    });
+</script>
+
 </body>
 </html>
