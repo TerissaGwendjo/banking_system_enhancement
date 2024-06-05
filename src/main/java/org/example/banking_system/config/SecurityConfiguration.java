@@ -16,18 +16,18 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfiguration{
     @Bean
-
+    // Annotates this method as a bean that Spring should manage
     public UserDetailsService userDetailsService(UserServiceImplementation userService) {
 
         return userService;
-
+        // Return the UserServiceImplementation as the UserDetailsService
     }
-
-
 
     @Bean
 
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        //allows us to define the chain of security filters
+        // This method configures the HttpSecurity object, which allows customization of security settings for HTTP requests.
 
         http
 
