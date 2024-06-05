@@ -38,7 +38,6 @@ public class SecurityConfiguration{
                         .anyRequest().authenticated()
 
                 )
-
                 .formLogin(formLogin -> formLogin
 
                         .loginPage("/login") // Specifies the login page URL
@@ -47,7 +46,6 @@ public class SecurityConfiguration{
                         .defaultSuccessUrl("/", true)
 
                         .permitAll() // Allow everyone to see the login page
-
                 )
 
                 .logout(logout -> logout
@@ -58,14 +56,11 @@ public class SecurityConfiguration{
                         .logoutSuccessUrl("/login?logout")
 
                         .permitAll()
-
                 );
         // Builds and returns the SecurityFilterChain
         return http.build();
 
     }
-
-
 
     @Autowired
 
@@ -78,9 +73,6 @@ public class SecurityConfiguration{
                 .passwordEncoder(new BCryptPasswordEncoder());
 
     }
-
-
-
 
 
 
