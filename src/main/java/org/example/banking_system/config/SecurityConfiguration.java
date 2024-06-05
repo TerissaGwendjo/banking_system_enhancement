@@ -51,10 +51,10 @@ public class SecurityConfiguration{
                 .logout(logout -> logout
 
                         .logoutUrl("/logout") // Specifies the logout page URL
-
                         // Redirect to the login page with a logout parameter after a successful logout
                         .logoutSuccessUrl("/login?logout")
-
+                        .invalidateHttpSession(true) // Invalidates the HTTP session after logout to prevent session fixation attacks.
+                        .deleteCookies("JSESSIONNID") // Deletes the JSESSIONNID cookie upon logout
                         .permitAll()
                 );
         // Builds and returns the SecurityFilterChain
