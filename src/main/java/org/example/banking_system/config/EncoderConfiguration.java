@@ -9,8 +9,10 @@ public class EncoderConfiguration {
     @Bean
 
     public BCryptPasswordEncoder passwordEncoder() {
-
         return new BCryptPasswordEncoder();
+        // Creates a new instance of BCryptPasswordEncoder
+        // BCrypt is a password hashing function designed for secure password storage
+        // It includes a salt to protect against rainbow table attacks and is computationally intensive to slow down brute-force attacks
 
     }
 }

@@ -13,7 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity // a Spring Security annotation used to enable web security in a Spring application.
 public class SecurityConfiguration{
     @Bean
     // Annotates this method as a bean that Spring should manage
@@ -63,14 +63,18 @@ public class SecurityConfiguration{
     }
 
     @Autowired
-
+    // Configures the global authentication manager
     public void configureGlobal(
-            AuthenticationManagerBuilder auth,
-            UserDetailsService userDetailsService
+            AuthenticationManagerBuilder auth, // Builder for creating an AuthenticationManager
+            UserDetailsService userDetailsService // Service to load user-specific data
     ) throws Exception {
+        // This method can throw various exceptions, such as:
+        // - ConfigurationException: If there's an error configuring the AuthenticationManagerBuilder
+        // - UsernameNotFoundException: If the UserDetailsService cannot find a user by the given username
+
         auth
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(new BCryptPasswordEncoder());
+                .userDetailsService(userDetailsService) // Uses the provided UserDetailsService to load user details
+                .passwordEncoder(new BCryptPasswordEncoder()); // Sets the password encoder to BCrypt for encoding and matching passwords
 
     }
 
@@ -78,16 +82,16 @@ public class SecurityConfiguration{
 
 /*
     @Bean // implicates that the method password Encoder returns a new instance of the password encoder class
-    // A bean in Spring is an object created, configured, and managed by the Spring IoC container.
-    // Inversion of Control (IoC) is a design principle in software engineering where the control of object creation
-    // and dependency management is transferred from the application code to a container or framework.
+    A bean in Spring is an object created, configured, and managed by the Spring IoC container.
+    Inversion of Control (IoC) is a design principle in software engineering where the control of object creation
+    and dependency management is transferred from the application code to a container or framework.
     public BCryptPasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
     protected void configure(HttpSecurity httpSecurity)  {}
-    //protected meaning it can be accessible only within the package
-            //or subclasses even if the subclasses aren't in the package.
+    protected meaning it can be accessible only within the package
+    or subclasses even if the subclasses aren't in the package.
 */
 
 }
