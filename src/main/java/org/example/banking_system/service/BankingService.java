@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
  * that will use it.
  */
 @Service
-public interface AccountService {
+public interface BankingService {
 
     //This method simulates opening a new account with a specific type and initial deposit.
     void openNewAccount(String accountType, double initialDeposit);

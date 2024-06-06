@@ -1,6 +1,7 @@
 package org.example.banking_system.service;
 
 import org.example.banking_system.model.User;
+import org.example.banking_system.repository.AccountRepository;
 import org.example.banking_system.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,8 +14,10 @@ public class UserServiceImplementation implements UserService{
     @Autowired
     UserRepository userRepository;
     @Autowired
+    private AccountRepository accountRepository;
+    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
-    //paswordEncoder is like a specific hashing code which is a critical aspect of securing user passwords.
+    //passwordEncoder is like a specific hashing code which is a critical aspect of securing user passwords.
     // So there is no way to come back to the password through it. So the database will never return to the original password
 
     @Override

@@ -17,7 +17,8 @@ public class Account {
     private String accountType;
     private Double balance;
 
-    @ManyToOne //  indicates that the field user represents a many-to-one relationship
+    @ManyToOne // it means that many instances of one entity (let's call it Account) can be associated with one
+    // instance of another entity (let's call it User). So, many accounts can belong to a single user.
     @JoinColumn(name = "user_id" , nullable = false) //This annotation tells JPA that a foreign key column exists in the
     // Expense table to reference the primary key of another table.
     private User user;

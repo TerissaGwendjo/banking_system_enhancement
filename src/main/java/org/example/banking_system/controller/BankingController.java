@@ -1,6 +1,6 @@
 package org.example.banking_system.controller;
 
-import org.example.banking_system.service.AccountService;
+import org.example.banking_system.service.BankingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class BankingController {
 
     @Autowired // Injects the AccountService bean into this controller
-    private AccountService accountService;
+    private BankingService accountService;
 
     @GetMapping("/") // Maps the "/" URL to this method to show the home page
     public String showHomePage() {
