@@ -55,4 +55,13 @@ public class User {
     public Long getId() {
         return id;
     }
+
+    //Getters and setters for accounts
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
+    }
 }

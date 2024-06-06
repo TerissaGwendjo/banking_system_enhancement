@@ -1,5 +1,6 @@
 package org.example.banking_system.service;
 
+import org.example.banking_system.model.Account;
 import org.example.banking_system.model.User;
 import org.example.banking_system.repository.AccountRepository;
 import org.example.banking_system.repository.UserRepository;
@@ -8,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserServiceImplementation implements UserService{
@@ -18,7 +21,7 @@ public class UserServiceImplementation implements UserService{
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
     //passwordEncoder is like a specific hashing code which is a critical aspect of securing user passwords.
-    // So there is no way to come back to the password through it. So the database will never return to the original password
+    //So there is no way to come back to the password through it. So the database will never return to the original password
 
     @Override
     public void saveUser(String username, String password) {
@@ -42,6 +45,17 @@ public class UserServiceImplementation implements UserService{
     }
 
     // rawPassword: 123456 -> encodedPassword: 9Z#@c4fpT8gRUw5
+
+    //extra service to save user with accounts
+    public void saveUserWithAccounts (String userName, String password, List<Account>accounts) {
+        User user = new User(userName, passwordEncoder.encode(password));
+        for (Account a: accounts) {
+            a.setUser(user);
+        }
+        user.setAccounts(accounts);
+        userRepository.save(user);
+        //SO basically, for each user, we set the account and later on save the user
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
