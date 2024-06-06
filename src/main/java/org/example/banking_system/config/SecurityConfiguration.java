@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-@Configuration
+@Configuration // it indicates that this class contains bean configuration for our security settings in our spring boot application
 @EnableWebSecurity // a Spring Security annotation used to enable web security in a Spring application.
 public class SecurityConfiguration{
     @Bean

@@ -2,6 +2,8 @@ package org.example.banking_system.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -12,6 +14,14 @@ public class User {
     private String username;
     @Column(nullable = false)
     String password;
+
+    @OneToMany (mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true) // meaning one user entity can be attributed to many accounts instances
+    /* The Account entity has a field named user that references the User it belongs to. Any changes to the user
+    (like saving, updating, or deleting) will automatically apply to all related orders (cascade = CascadeType.ALL). Additionally, if an order
+    is removed from the user's list of orders, it will be deleted from the database to ensure no orders are left
+    without an associated user (orphanRemoval = true).*/
+
+    private List<Account> accounts; //A single user can have many eccounts,
 
     // Constructors
     public User() {

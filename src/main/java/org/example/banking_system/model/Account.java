@@ -3,6 +3,7 @@ package org.example.banking_system.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table (name = "accounts") // the table should be in plural
 // The @Entity annotation tells the JPA provider (such as Hibernate) that this class is to be mapped to a database table.
 // The fields of the class correspond to columns in the table.
 public class Account {
@@ -12,9 +13,23 @@ public class Account {
     private Long id; // Unique identifier for the account
 
     @Column (unique = true, nullable = false)
-    private String accountNumber; // provided by the bank system and not ID and should be unique
+    private String accountNumber; // provided by the bank system and not ID and should be unique and NOT NULL
     private String accountType;
     private Double balance;
+
+    @ManyToOne //  indicates that the field user represents a many-to-one relationship
+    @JoinColumn(name = "user_id" , nullable = false) //This annotation tells JPA that a foreign key column exists in the
+    // Expense table to reference the primary key of another table.
+    private User user;
+
+    //Getters and setters for the user
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     //default constructor
     public Account() {
@@ -23,18 +38,20 @@ public class Account {
     }
 
     // Parameterized constructor that initializes all fields
-    public Account(Long id, String accountNumber, String accountType, Double balance) {
+    public Account(Long id, String accountNumber, String accountType, Double balance, User user) {
         this.id = id;
         this.accountNumber = accountNumber;
         this.accountType = accountType;
         this.balance = balance;
+        this.user = user;
     }
 
     // Parameterized constructor that initializes all fields except id
-    public Account(String accountNumber, String accountType, Double balance) {
+    public Account(String accountNumber, String accountType, Double balance, User user) {
         this.accountNumber = accountNumber;
         this.accountType = accountType;
         this.balance = balance;
+        this.user = user;
     }
 
     // Getters and setters
