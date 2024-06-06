@@ -18,17 +18,9 @@ public class UserController {
 
     // Handles GET requests to the "/login" URL
     @GetMapping("/login")
-    public String showLoginForm(HttpServletRequest request, Model model) {
-        // Retrieves the "error" attribute from the session
-        String errorMessage = (String) request.getSession().getAttribute("error");
-
-        if (errorMessage != null) {
-            // Adds the error message to the model if it exists
-            model.addAttribute("errorMessage", errorMessage);
-        } else {
-            // Adds a default error message to the model if none exists
+    public String showLoginForm( Model model) {
+            // Adds a default error message to the model
             model.addAttribute("errorMessage", "Invalid credentials");
-        }
 
         // Returns the "login" view
         return "login";
@@ -53,6 +45,7 @@ public class UserController {
 
     @GetMapping("/logout")
     public String logout() {
+
         return "redirect:/login?logout"; // Redirect to login page with logout parameter
     }
 
