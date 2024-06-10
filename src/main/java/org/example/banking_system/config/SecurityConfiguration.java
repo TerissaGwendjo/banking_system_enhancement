@@ -38,7 +38,7 @@ public class SecurityConfiguration{
                         .anyRequest().authenticated()
 
                 )
-                .formLogin(formLogin -> formLogin
+                .formLogin(formLogin -> formLogin // first page is to be the login page
 
                         .loginPage("/login") // Specifies the login page URL
 

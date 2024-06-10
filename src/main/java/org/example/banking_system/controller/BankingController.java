@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class BankingController {
 
-    @Autowired // Injects the AccountService bean into this controller
+    /*@Autowired // Injects the AccountService bean into this controller
     private BankingService accountService;
 
     @GetMapping("/") // Maps the "/" URL to this method to show the home page
@@ -73,5 +73,5 @@ public class BankingController {
     ){
         accountService.transferMoney(fromAccount,toAccount,amount); // Calls the AccountService to transfer money
         return "redirect:/"; // Redirects the user to the home page after transferring money
-    }
+    }*/
 }

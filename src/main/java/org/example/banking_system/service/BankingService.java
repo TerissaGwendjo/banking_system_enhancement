@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public interface BankingService {
 
     //This method simulates opening a new account with a specific type and initial deposit.
-    void openNewAccount(String accountType, double initialDeposit);
+    void openNewAccount(String accountType, double initialDeposit, Long userId);
 
     //This method simulates depositing money into an account identified by its number.
     void depositMoney (String accountNumber, double amount);
