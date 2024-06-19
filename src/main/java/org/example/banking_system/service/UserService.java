@@ -1,5 +1,6 @@
 package org.example.banking_system.service;
 
+import jakarta.transaction.Transactional;
 import org.example.banking_system.model.User;
 import org.example.banking_system.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,9 @@ public interface UserService extends UserDetailsService {
     * @param usernames: String and unique username
     * @param password: String value
     * return no specific value: */
-    public void saveUser (String usernames, String password);
+
+    @Transactional
+    boolean saveUser(User user);
 
     //find user by username
     User findByUserName(String username);

@@ -14,9 +14,20 @@
             <input type="text" id="username" name="username" class="form-control" required>
         </div>
         <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
             <label for="password" class="form-label">Password</label>
             <input type="password" id="password" name="password" class="form-control" required>
         </div>
+
+        <div th:if="${errorMessage}">
+            <div class="alert alert-danger" role="alert">
+                <span th:text="${errorMessage}"></span>
+            </div>
+        </div>
+
         <button type="submit" class="btn btn-primary">Sign Up</button>
     </form>
     <div class="mt-3">

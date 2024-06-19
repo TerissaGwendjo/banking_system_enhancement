@@ -1,6 +1,7 @@
 package org.example.banking_system.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.example.banking_system.model.User;
 import org.example.banking_system.service.UserServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,12 +36,19 @@ public class UserController {
 
     // Handles POST requests to the "/signup" URL
     @PostMapping("/signup")
-    public String signUp(@RequestParam String username, @RequestParam String password) {
-        // Calls the userService to save the new user with the provided username and password
-        userService.saveUser(username, password);
+    public String signUp(User user, Model model) {
+        boolean isUserSaved = userService.saveUser(user);
+        if (!isUserSaved){
+            model.addAttribute("errorMessage", "Failed to send verification e-mail. Please add a valid email address!");
+            return "redirect:/signup";
+        }
+        return "redirect:/login";
+    }
 
-        // Redirects to the login page with a success query parameter
-        return "redirect:/login?success=true";
+    @GetMapping("/verify")
+    public String verifyUser (@RequestParam("token") String token) {
+        userService.verifyUser(token);
+        return "redirect:/login?verified";
     }
 
     @GetMapping("/logout")

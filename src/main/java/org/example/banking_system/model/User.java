@@ -12,6 +12,8 @@ public class User {
     private Long id;
     @Column(unique = true, nullable = true)
     private String username;
+    @Column(unique = true, nullable = false)
+    private  String email;
     @Column(nullable = false)
     String password;
 
@@ -23,16 +25,34 @@ public class User {
 
     private List<Account> accounts; //A single user can have many eccounts,
 
+    @Column(nullable = false)
+    private boolean verified = false; // so from here we ask what user has been verified
+
     // Constructors
     public User() {
+    }
+    public User(Long id, String username, String email, String password, List<Account> accounts) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.accounts = accounts;
+    }
+
+    public User(String username, String email, String password, List<Account> accounts) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.accounts = accounts;
     }
     public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
-    public User(Long id, String username, String password) {
-        this.id = id;
+
+    public User(String username, String email, String password) {
         this.username = username;
+        this.email = email;
         this.password = password;
     }
 
@@ -63,5 +83,21 @@ public class User {
 
     public void setAccounts(List<Account> accounts) {
         this.accounts = accounts;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
     }
 }
